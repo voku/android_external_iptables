@@ -6,8 +6,9 @@
  *
  * libipt_ECN.c borrowed heavily from libipt_DSCP.c
  *
- * $Id$
+ * $Id: //atg/packetfilter/tagging/platform_passion/external/iptables/extensions/libipt_ECN.c#1 $
  */
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -32,11 +33,11 @@ static void ECN_help(void)
 
 
 static const struct option ECN_opts[] = {
-	{ "ecn-tcp-remove", 0, NULL, 'F' },
-	{ "ecn-tcp-cwr", 1, NULL, 'G' },
-	{ "ecn-tcp-ece", 1, NULL, 'H' },
-	{ "ecn-ip-ect", 1, NULL, '9' },
-	{ .name = NULL }
+	{.name = "ecn-tcp-remove", .has_arg = false, .val = 'F'},
+	{.name = "ecn-tcp-cwr",    .has_arg = true,  .val = 'G'},
+	{.name = "ecn-tcp-ece",    .has_arg = true,  .val = 'H'},
+	{.name = "ecn-ip-ect",     .has_arg = true,  .val = '9'},
+	XT_GETOPT_TABLEEND,
 };
 
 static int ECN_parse(int c, char **argv, int invert, unsigned int *flags,
@@ -163,7 +164,7 @@ static struct xtables_target ecn_tg_reg = {
 	.extra_opts	= ECN_opts,
 };
 
-void libipt_ECN_init(void)
+void _init(void)
 {
 	xtables_register_target(&ecn_tg_reg);
 }

@@ -5,6 +5,7 @@
  *
  * Copyright (C) 2006 Red Hat, Inc., James Morris <jmorris@redhat.com>
  */
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -23,9 +24,9 @@ static void CONNSECMARK_help(void)
 }
 
 static const struct option CONNSECMARK_opts[] = {
-	{ "save", 0, NULL, '1' },
-	{ "restore", 0, NULL, '2' },
-	{ .name = NULL }
+	{.name = "save",    .has_arg = false, .val = '1'},
+	{.name = "restore", .has_arg = false, .val = '2'},
+	XT_GETOPT_TABLEEND,
 };
 
 static int
@@ -121,7 +122,7 @@ static struct xtables_target connsecmark_target = {
 	.extra_opts	= CONNSECMARK_opts,
 };
 
-void libxt_CONNSECMARK_init(void)
+void _init(void)
 {
 	xtables_register_target(&connsecmark_target);
 }

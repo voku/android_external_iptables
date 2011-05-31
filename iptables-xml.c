@@ -5,7 +5,7 @@
  *
  * This code is distributed under the terms of GNU GPL v2
  *
- * $Id: iptables-xml.c,v 1.4 2006/11/09 12:02:17 azez Exp $
+ * $Id: //atg/packetfilter/tagging/platform_passion/external/iptables/iptables-xml.c#1 $
  */
 
 #include <getopt.h>
@@ -64,7 +64,7 @@ print_usage(const char *name, const char *version)
 static int
 parse_counters(char *string, struct ipt_counters *ctr)
 {
-	u_int64_t *pcnt, *bcnt;
+	__u64 *pcnt, *bcnt;
 
 	if (string != NULL) {
 		pcnt = &ctr->pcnt;

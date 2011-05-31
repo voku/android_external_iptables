@@ -1,10 +1,10 @@
 /* Shared library add-on to iptables to add TTL matching support 
  * (C) 2000 by Harald Welte <laforge@gnumonks.org>
  *
- * $Id$
+ * $Id: //atg/packetfilter/tagging/platform_passion/external/iptables/extensions/libipt_ttl.c#1 $
  *
  * This program is released under the terms of GNU GPL */
-
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -139,11 +139,11 @@ static void ttl_save(const void *ip, const struct xt_entry_match *match)
 }
 
 static const struct option ttl_opts[] = {
-	{ "ttl", 1, NULL, '2' },
-	{ "ttl-eq", 1, NULL, '2'},
-	{ "ttl-lt", 1, NULL, '3'},
-	{ "ttl-gt", 1, NULL, '4'},
-	{ .name = NULL }
+	{.name = "ttl",    .has_arg = true, .val = '2'},
+	{.name = "ttl-eq", .has_arg = true, .val = '2'},
+	{.name = "ttl-lt", .has_arg = true, .val = '3'},
+	{.name = "ttl-gt", .has_arg = true, .val = '4'},
+	XT_GETOPT_TABLEEND,
 };
 
 static struct xtables_match ttl_mt_reg = {

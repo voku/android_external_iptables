@@ -7,7 +7,7 @@
  *      Rusty Russell <rusty@linuxcare.com.au>
  * This code is distributed under the terms of GNU GPL v2
  *
- * $Id$
+ * $Id: //atg/packetfilter/tagging/platform_passion/external/iptables/ip6tables-restore.c#1 $
  */
 
 #include <getopt.h>
@@ -252,6 +252,12 @@ int main(int argc, char *argv[])
 					   line);
 				exit(1);
 			}
+
+			if (strlen(chain) >= XT_EXTENSION_MAXNAMELEN)
+				xtables_error(PARAMETER_PROBLEM,
+					   "Invalid chain name `%s' "
+					   "(%u chars max)",
+					   chain, XT_EXTENSION_MAXNAMELEN - 1);
 
 			if (ip6tc_builtin(chain, handle) <= 0) {
 				if (noflush && ip6tc_is_chain(chain, handle)) {

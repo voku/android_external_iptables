@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include <netdb.h>
 #include <string.h>
@@ -21,11 +22,11 @@ static void statistic_help(void)
 }
 
 static const struct option statistic_opts[] = {
-	{ "mode", 1, NULL, '1' },
-	{ "probability", 1, NULL, '2' },
-	{ "every", 1, NULL, '3' },
-	{ "packet", 1, NULL, '4' },
-	{ .name = NULL }
+	{.name = "mode",        .has_arg = true, .val = '1'},
+	{.name = "probability", .has_arg = true, .val = '2'},
+	{.name = "every",       .has_arg = true, .val = '3'},
+	{.name = "packet",      .has_arg = true, .val = '4'},
+	XT_GETOPT_TABLEEND,
 };
 
 static struct xt_statistic_info *global_info;
@@ -174,7 +175,7 @@ static struct xtables_match statistic_match = {
 	.extra_opts	= statistic_opts,
 };
 
-void libxt_statistic_init(void)
+void _init(void)
 {
 	xtables_register_match(&statistic_match);
 }

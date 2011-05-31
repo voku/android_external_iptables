@@ -23,6 +23,10 @@
 #define inline
 #endif
 
+#if !defined(__GLIBC__) || (__GLIBC__ < 2)
+typedef unsigned int socklen_t;
+#endif
+
 #include "libiptc/libip6tc.h"
 
 #define HOOK_PRE_ROUTING	NF_IP6_PRE_ROUTING

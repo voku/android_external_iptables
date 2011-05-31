@@ -1,10 +1,11 @@
 /* Shared library add-on to iptables for the TTL target
  * (C) 2000 by Harald Welte <laforge@gnumonks.org>
  *
- * $Id$
+ * $Id: //atg/packetfilter/tagging/platform_passion/external/iptables/extensions/libipt_TTL.c#1 $
  *
  * This program is distributed under the terms of GNU GPL
  */
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -131,10 +132,10 @@ static void TTL_print(const void *ip, const struct xt_entry_target *target,
 }
 
 static const struct option TTL_opts[] = {
-	{ "ttl-set", 1, NULL, '1' },
-	{ "ttl-dec", 1, NULL, '2' },
-	{ "ttl-inc", 1, NULL, '3' },
-	{ .name = NULL }
+	{.name = "ttl-set", .has_arg = true, .val = '1'},
+	{.name = "ttl-dec", .has_arg = true, .val = '2'},
+	{.name = "ttl-inc", .has_arg = true, .val = '3'},
+	XT_GETOPT_TABLEEND,
 };
 
 static struct xtables_target ttl_tg_reg = {
@@ -151,7 +152,7 @@ static struct xtables_target ttl_tg_reg = {
 	.extra_opts	= TTL_opts,
 };
 
-void libipt_TTL_init(void)
+void _init(void)
 {
 	xtables_register_target(&ttl_tg_reg);
 }

@@ -1,7 +1,7 @@
 #ifndef _IPTABLES_USER_H
 #define _IPTABLES_USER_H
 
-#include <linux/ip.h>
+#include <netinet/ip.h>
 #include <xtables.h>
 #include <libiptc/libiptc.h>
 #include <iptables/internal.h>

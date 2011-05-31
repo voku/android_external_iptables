@@ -29,8 +29,8 @@
 #define IPPROTO_UDPLITE	136
 #endif
 
-#define XTABLES_VERSION "libxtables.so.4"
-#define XTABLES_VERSION_CODE 4
+#define XTABLES_VERSION "libxtables.so.1.4.10"
+#define XTABLES_VERSION_CODE 1.4.10
 
 struct in_addr;
 
@@ -199,6 +199,8 @@ struct xtables_globals
 	void (*exit_err)(enum xtables_exittype status, const char *msg, ...) __attribute__((noreturn, format(printf,2,3)));
 };
 
+#define XT_GETOPT_TABLEEND {NULL}
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -216,7 +218,6 @@ extern void *xtables_realloc(void *, size_t);
 extern int xtables_insmod(const char *, const char *, bool);
 extern int xtables_load_ko(const char *, bool);
 extern int xtables_set_params(struct xtables_globals *xtp);
-extern void xtables_set_revision(char *name, u_int8_t revision);
 extern void xtables_free_opts(int reset_offset);
 extern struct option *xtables_merge_options(struct option *oldopts,
 	const struct option *newopts, unsigned int *option_offset);
@@ -239,7 +240,7 @@ extern bool xtables_strtoui(const char *, char **, unsigned int *,
 	unsigned int, unsigned int);
 extern int xtables_service_to_port(const char *name, const char *proto);
 extern u_int16_t xtables_parse_port(const char *port, const char *proto);
-extern void
+extern void 
 xtables_parse_interface(const char *arg, char *vianame, unsigned char *mask);
 
 /* this is a special 64bit data type that is 8-byte aligned */

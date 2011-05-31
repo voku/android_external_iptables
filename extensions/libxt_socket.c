@@ -13,7 +13,7 @@ static struct xtables_match socket_mt_reg = {
 	.userspacesize = XT_ALIGN(0),
 };
 
-void libxt_socket_init(void)
+void _init(void)
 {
 	xtables_register_match(&socket_mt_reg);
 }
